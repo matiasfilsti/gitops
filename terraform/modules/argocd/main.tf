@@ -4,6 +4,18 @@ resource "kubernetes_namespace" "argocd" {
   }
 }
 
+resource "kubernetes_namespace" "staging" {
+  metadata {
+    name = "staging"
+  }
+}
+
+resource "kubernetes_namespace" "production" {
+  metadata {
+    name = "production"
+  }
+}
+
 resource "helm_release" "argocd" {
   name       = "argocd-staging"
   chart      = "argo-cd"
@@ -26,5 +38,57 @@ resource "null_resource" "del-argo-pass" {
   depends_on = [null_resource.password]
   provisioner "local-exec" {
     command = "kubectl -n argocd-staging delete secret argocd-initial-admin-secret"
+  }
+}
+
+
+resource "kubernetes_manifest" "argo_project_test" {
+  manifest = {
+    "apiVersion" = "argoproj.io/v1alpha1"
+    "kind"       = "AppProject"
+    "metadata" = {
+      "name"      = "app-go-test"
+      "namespace" = "argocd-${var.env}"
+      "finalizers" = "resources-finalizer.argocd.argoproj.io"
+    }
+    "spec" = {
+      "sourceRepos" = "https://github.com/matiasfilsti/gitops-argocd.git"
+      "destinations" = {
+        "namespace" = "staging"
+        "server" = "*"
+      }
+      "roles" = {
+        "name" = "test-access"
+        "description" = "Only for test access"
+        "policies" = "p, proj:app-go-test:, *, app-test-go-test/*, allow"
+
+      }
+    }
+  }
+}
+
+
+resource "kubernetes_manifest" "argo_project_prod" {
+  manifest = {
+    "apiVersion" = "argoproj.io/v1alpha1"
+    "kind"       = "AppProject"
+    "metadata" = {
+      "name"      = "app-go-prod"
+      "namespace" = "argocd-${var.env}"
+      "finalizers" = "resources-finalizer.argocd.argoproj.io"
+    }
+    "spec" = {
+      "sourceRepos" = "https://github.com/matiasfilsti/gitops-argocd.git"
+      "destinations" = {
+        "namespace" = "production"
+        "server" = "*"
+      }
+      "roles" = {
+        "name" = "test-access"
+        "description" = "Only for test access"
+        "policies" = "p, role:test-access, *, app-test-go-test/*, allow"
+
+      }
+    }
   }
 }
