@@ -4,18 +4,6 @@ resource "kubernetes_namespace" "argocd" {
   }
 }
 
-resource "kubernetes_namespace" "staging" {
-  metadata {
-    name = "staging"
-  }
-}
-
-resource "kubernetes_namespace" "production" {
-  metadata {
-    name = "production"
-  }
-}
-
 resource "helm_release" "argocd" {
   name       = "argocd-staging"
   chart      = "argo-cd"
@@ -41,6 +29,11 @@ resource "null_resource" "del-argo-pass" {
   }
 }
 
+resource "kubernetes_namespace" "staging" {
+  metadata {
+    name = "staging"
+  }
+}
 
 resource "kubernetes_manifest" "argo_project_test" {
   manifest = {
@@ -49,21 +42,22 @@ resource "kubernetes_manifest" "argo_project_test" {
     "metadata" = {
       "name"      = "app-go-test"
       "namespace" = "argocd-${var.env}"
-      "finalizers" = "resources-finalizer.argocd.argoproj.io"
     }
     "spec" = {
-      "sourceRepos" = "https://github.com/matiasfilsti/gitops-argocd.git"
-      "destinations" = {
+      "sourceRepos" = ["https://github.com/matiasfilsti/gitops-argocd.git"]
+      "destinations" = [{
         "namespace" = "staging"
         "server" = "*"
-      }
-      "roles" = {
-        "name" = "test-access"
-        "description" = "Only for test access"
-        "policies" = "p, proj:app-go-test:, *, app-test-go-test/*, allow"
-
-      }
+      }]
     }
+  }
+}
+
+
+
+resource "kubernetes_namespace" "production" {
+  metadata {
+    name = "production"
   }
 }
 
@@ -75,20 +69,13 @@ resource "kubernetes_manifest" "argo_project_prod" {
     "metadata" = {
       "name"      = "app-go-prod"
       "namespace" = "argocd-${var.env}"
-      "finalizers" = "resources-finalizer.argocd.argoproj.io"
     }
     "spec" = {
-      "sourceRepos" = "https://github.com/matiasfilsti/gitops-argocd.git"
-      "destinations" = {
+      "sourceRepos" = ["https://github.com/matiasfilsti/gitops-argocd.git"]
+      "destinations" = [{
         "namespace" = "production"
         "server" = "*"
-      }
-      "roles" = {
-        "name" = "test-access"
-        "description" = "Only for test access"
-        "policies" = "p, role:test-access, *, app-test-go-test/*, allow"
-
-      }
+      }]
     }
   }
 }

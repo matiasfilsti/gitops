@@ -5,7 +5,7 @@ edit argocd-cm and add in data section:
 accounts.testuser01: apiKey,login
 accounts.produser01: apiKey,login
 update password for user testuser01
-argocd account update-password --account testuser01 --new-password 1234 --current-password admin-p@ssw0rd
+argocd account update-password --account testuser01 --new-password matt01234A --current-password admin-p@ssw0rd
 argocd account update-password --account produser01 --new-password 1234 --current-password admin-p@ssw0rd
 
 create roles for users

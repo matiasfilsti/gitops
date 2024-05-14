@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app01
+  name: my-app02
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-app01
+      app: my-app02
   template:
     metadata:
       labels:
-        app: my-app01
+        app: my-app02
     spec:
       containers:
-      - name: my-app01
+      - name: my-app02
         image: filstimatias/gitops-goapp:8568ca149ab941abdce5f845cfd2dff4715cb1c0
         ports:
         - containerPort: 8080
