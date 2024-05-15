@@ -9,12 +9,14 @@ locals {
 
 module "argocd" {
   source = "./modules/argocd"
-    }
+  }
 
 module "argocd-config" {
+  execute = false
+  depends_on = [module.argocd]
   for_each = local.environments
-  source = "./modules/argocd-configureation"
-  sourceRepos = each.values.sourceRepos
+  source = "./modules/argocd-configuration"
+  sourceRepos = each.value.sourceRepos
   env = each.key
-  projectname = each.values.projectname
+  projectname = each.value.projectname
   }

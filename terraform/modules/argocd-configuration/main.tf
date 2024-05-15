@@ -15,9 +15,9 @@ resource "kubernetes_manifest" "argo_project" {
       "namespace" = "argocd"
     }
     "spec" = {
-      "sourceRepos" = var.sourceRepos
+      "sourceRepos" = [var.sourceRepos]
       "destinations" = [{
-        "namespace" = "${kubernetes_namespace.namespace.name}"
+        "namespace" = kubernetes_namespace.namespace.metadata[0].name
         "server" = "*"
       }]
     }

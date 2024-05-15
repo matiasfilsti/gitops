@@ -1,3 +1,4 @@
+
 resource "kubernetes_namespace" "argocd" {
   metadata {
     name = "argocd"
@@ -12,6 +13,7 @@ resource "helm_release" "argocd" {
   namespace  = "argocd"
   timeout    = "1200"
   values     = [templatefile("./modules/argocd/values.yaml", {})]
+  skip_crds  = true
 }
 
 resource "null_resource" "password" {
