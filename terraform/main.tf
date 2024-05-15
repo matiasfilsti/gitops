@@ -1,3 +1,6 @@
+### before everything, download latest crds from https://github.com/argoproj/argo-cd/tree/master/manifests/crds. ###
+### execute kubectl apply -k . in argocd/crds folder                                                             ###
+###  https://github.com/argoproj/argo-helm/discussions/1476                                                      ###
 
 locals {
   environments = {

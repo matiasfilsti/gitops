@@ -1,20 +1,34 @@
 add local user: 
 
 edit argocd-cm and add in data section:
+kubectl -n argocd edit configmap argocd-cm
 
 accounts.testuser01: apiKey,login
 accounts.produser01: apiKey,login
-update password for user testuser01
-argocd account update-password --account testuser01 --new-password matt01234A --current-password admin-p@ssw0rd
-argocd account update-password --account produser01 --new-password 1234 --current-password admin-p@ssw0rd
 
 create roles for users
 edit argocd-rbac-cm
+kubectl -n argocd edit configmap argocd-rbac-cm
 add in data section:
 policy.default: role:readonly
 policy.csv: |
-  p, role:test-role, applications, create, app-go-test/*, allow
-  p, role:test-role, projects, get, app-go-test, allow
-  p, role:prod-role, applications, create, *, allow
-  p, role:prod-role, projects, get, *, allow
+  p, role:test-role, applications, *, app-go-stg/*, allow
+  p, role:test-role, projects, get, app-go-stg, allow
+  p, role:prod-role, applications, *, app-go-prod/*, allow
+  p, role:prod-role, projects, get, app-go-prod, allow
   g, produser01, role:prod-role
+  g, testuser01, role:test-role
+
+
+execute 
+https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/02-getting_started.html
+
+minikube -n argocd service argocd-server --url
+
+argocd login 127.0.0.1:50704
+user: admin
+pass: 
+
+update password for users
+argocd account update-password --account testuser01 --new-password matt01234A --current-password wQOE5HZyiU7Fiyra
+argocd account update-password --account produser01 --new-password matt01234A --current-password wQOE5HZyiU7Fiyra
