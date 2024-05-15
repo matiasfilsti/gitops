@@ -2,12 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: app02
-  namespace: argocd-staging
+  namespace: argocd
 spec:
   destination:
     namespace: staging
     server: https://kubernetes.default.svc
-  project: app-go-test
+  project: app-go-stg
   source:
     path: overlays/Staging
     repoURL: https://github.com/matiasfilsti/gitops-argocd.git
