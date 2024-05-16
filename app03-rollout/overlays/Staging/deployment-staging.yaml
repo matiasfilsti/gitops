@@ -3,5 +3,5 @@ kind: Rollout
 metadata:
   name: my-app03
 spec:
-  replicas: 1
+  replicas: 4
   
