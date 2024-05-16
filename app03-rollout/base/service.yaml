@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app03-service
+  labels:
+    app: my-app03
+spec:
+  selector:
+    app: my-app03
+  type: NodePort
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080 # Debe coincidir con el puerto del contenedor en el deployment
+    targetPort: 8080 # Debe coincidir con el puerto del contenedor en el deployment
+    nodePort: 30000

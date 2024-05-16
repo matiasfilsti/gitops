@@ -1,0 +1,6 @@
+controller:
+  replicas: 1
+
+dashboard:
+  enabled: true
+  replicas: 1

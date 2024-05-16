@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Rollout
+metadata:
+  name: my-app03
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app03
+  template:
+    metadata:
+      labels:
+        app: my-app03
+    spec:
+      containers:
+      - name: my-app03
+        image: argoproj/rollouts-demo:orange
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "50Mi"
+            cpu: "50m"
+          limits:
+            memory: "100Mi"
+            cpu: "100m"

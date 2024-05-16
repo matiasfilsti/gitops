@@ -23,3 +23,7 @@ module "argocd-config" {
   env = each.key
   projectname = each.value.projectname
   }
+
+  module "argo-rollout" {
+  source = "./modules/argo-rollout"
+  }
