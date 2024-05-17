@@ -20,5 +20,5 @@ spec:
               - name: http-checker
                 image: alpine:3.8
                 command: [sh, -c]                
-                args: [echo "tests finished at $(date)" && exit -1]
+                args: [echo "tests finished at $(date)" && exit 1]
               restartPolicy: Never
