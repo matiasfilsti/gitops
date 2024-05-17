@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app03
+  name: app04
   namespace: argocd
 spec:
   destination:
@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: app-go-stg
   source:
-    path: app03-rollout/overlays/Staging
+    path: app04-rollout-bg-withtest/overlays/Staging
     repoURL: https://github.com/matiasfilsti/gitops-argocd.git
     targetRevision: HEAD
   syncPolicy:

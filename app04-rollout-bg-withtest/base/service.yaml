@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app04-service-blue
+  labels:
+    app: my-app04
+spec:
+  selector:
+    app: my-app04
+  #type: NodePort
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080 
+    targetPort: 8080 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app04-service-green
+  labels:
+    app: my-app04
+spec:
+  selector:
+    app: my-app04
+  #type: NodePort
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080 
+    targetPort: 8080 

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app03
+  namespace: argocd
+spec:
+  destination:
+    namespace: staging
+    server: https://kubernetes.default.svc
+  project: app-go-stg
+  source:
+    path: app03-rollout-canary/overlays/Staging
+    repoURL: https://github.com/matiasfilsti/gitops-argocd.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=false
+    automated:
+      selfHeal: true
+      prune: true

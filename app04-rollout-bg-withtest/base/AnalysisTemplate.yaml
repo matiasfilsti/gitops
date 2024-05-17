@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: http-service-check
+  namespace: argocd
+spec:
+  metrics: # required
+  - name: http-service-check # required
+    initialDelay: 5
+    interval: 5
+    count: 1
+    failureLimit: 1
+    provider:
+      job:
+        spec:
+          backoffLimit: 0
+          template:
+            spec:
+              containers:
+              - name: http-checker
+                image: alpine:3.8
+                command: [sh, -c]                
+                args: [echo "tests finished at $(date)" && exit -1]
+              restartPolicy: Never
