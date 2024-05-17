@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
-kind: AnalysisTemplate
+kind: ClusterAnalysisTemplate
 metadata:
   name: http-service-check
-  namespace: argocd
+  namespace: staging
 spec:
   metrics: # required
   - name: http-service-check # required
-    initialDelay: 5
-    interval: 5
+    initialDelay: "5s"
+    interval: "5s"
     count: 1
     failureLimit: 1
     provider:

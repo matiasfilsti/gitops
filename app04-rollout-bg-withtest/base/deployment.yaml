@@ -31,3 +31,4 @@ spec:
       prePromotionAnalysis: 
         templates: 
         - templateName: http-service-check
+          clusterScope: true
