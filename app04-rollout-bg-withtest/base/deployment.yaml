@@ -29,7 +29,7 @@ spec:
       activeService: my-app04-service-blue
       previewService: my-app04-service-green
       previewReplicaCount: 2
-      autoPromotionEnabled: false
+      autoPromotionEnabled: true
       #autoPromotionSeconds: 1
       scaleDownDelaySeconds: 30
       prePromotionAnalysis: 
