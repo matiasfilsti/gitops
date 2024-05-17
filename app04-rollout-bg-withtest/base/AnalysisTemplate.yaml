@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ClusterAnalysisTemplate
 metadata:
   name: http-service-check
-  namespace: staging
+  namespace: argocd
 spec:
   metrics: # required
   - name: http-service-check # required
