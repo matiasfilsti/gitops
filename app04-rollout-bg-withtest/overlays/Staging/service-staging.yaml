@@ -1,12 +1,12 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: my-app04-service
-  labels:
-    app: my-app04
-spec:
-  ports:
-  - name: http
-    protocol: TCP
-    port: 8080 
-    targetPort: 8080
+##apiVersion: v1
+##kind: Service
+##metadata:
+##  name: my-app04-service
+##  labels:
+##    app: my-app04
+##spec:
+##  ports:
+##  - name: http
+##    protocol: TCP
+##    port: 8080 
+##    targetPort: 8080
