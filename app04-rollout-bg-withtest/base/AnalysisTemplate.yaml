@@ -13,12 +13,12 @@ spec:
     provider:
       job:
         spec:
-          backoffLimit: 0
+          backoffLimit: 1
           template:
             spec:
               containers:
               - name: http-checker
                 image: alpine:3.8
                 command: [sh, -c]                
-                args: [echo "tests finished at $(date)" && exit 1]
+                args: [echo "tests finished at $(date)" && exit -l]
               restartPolicy: Never
