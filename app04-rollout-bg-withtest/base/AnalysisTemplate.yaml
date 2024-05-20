@@ -8,17 +8,17 @@ spec:
   - name: http-service-check # required
     initialDelay: "5s"
     interval: "5s"
-    count: 1
+    count: 3
     failureLimit: 1
     provider:
       job:
         spec:
-          backoffLimit: 1
+          backoffLimit: 3
           template:
             spec:
               containers:
               - name: http-checker
                 image: alpine:3.8
                 command: [sh, -c]                
-                args: [echo "tests finished at $(date)" && exit -l]
+                args: [echo "tests finished at $(date)" && exit 1]
               restartPolicy: Never
