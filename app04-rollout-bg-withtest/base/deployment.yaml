@@ -34,5 +34,5 @@ spec:
       scaleDownDelaySeconds: 30
       prePromotionAnalysis: 
         templates: 
-        - templateName: http-service-check-custom
+        - templateName: http-check-custom
           clusterScope: true
