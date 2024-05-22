@@ -3,5 +3,11 @@ kind: Rollout
 metadata:
   name: my-app04
 spec:
-  replicas: 4
+  replicas: 2
+  strategy:
+    blueGreen: 
+      prePromotionAnalysis: 
+        templates: 
+        - templateName: http-check-stg
+          clusterScope: true
   
