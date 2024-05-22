@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app04
+  name: app04-prd
   namespace: argocd
 spec:
   destination:
     namespace: production
     server: https://kubernetes.default.svc
-  project: app-go-prd
+  project: app-go-prod
   source:
     path: app04-rollout-bg-withtest/overlays/Prod
     repoURL: https://github.com/matiasfilsti/gitops-argocd.git
