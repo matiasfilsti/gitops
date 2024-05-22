@@ -1,11 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ClusterAnalysisTemplate
 metadata:
-  name: http-check-custom
+  name: http-check-prd
   namespace: argocd
 spec:
   metrics: # required
-  - name: http-check-custom # required
+  - name: http-check-prd # required
     initialDelay: "5s"
     interval: "5s"
     count: 3
@@ -17,7 +17,7 @@ spec:
           template:
             spec:
               containers:
-              - name: http-custom
+              - name: http-prd
                 image: filstimatias/gitops-goapp:test
                 #command: [sh, -c]                
                 args: ["http://my-app04-service-green-prod.production.svc.cluster.local:8080/hello", "http://my-app04-service-green-prod.production.svc.cluster.local:8080/headers"]

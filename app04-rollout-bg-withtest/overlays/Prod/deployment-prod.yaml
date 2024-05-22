@@ -4,4 +4,9 @@ metadata:
   name: my-app04
 spec:
   replicas: 2
-  
+  strategy:
+    blueGreen: 
+      prePromotionAnalysis: 
+        templates: 
+        - templateName: http-check-prd
+          clusterScope: true

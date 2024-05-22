@@ -4,7 +4,7 @@ kind: Kustomization
 nameSuffix: -prod
 commonAnnotations: 
   app01.kubernetes.prod/managed-by: mfilsti
-Namespace: prod
+Namespace: production
 resources:
 - ../../base
 
