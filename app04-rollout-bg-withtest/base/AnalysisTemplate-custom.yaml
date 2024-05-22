@@ -20,5 +20,5 @@ spec:
               - name: http-custom
                 image: filstimatias/gitops-goapp:test
                 #command: [sh, -c]                
-                args: ["http://my-app04-service-green.staging.svc.cluster.local:8080/hello", "http://my-app04-service-green.staging.svc.cluster.local:8080/headers"]
+                args: ["http://my-app04-service-green-staging.staging.svc.cluster.local:8080/hello", "http://my-app04-service-green-staging.staging.svc.cluster.local:8080/headers"]
               restartPolicy: Never
