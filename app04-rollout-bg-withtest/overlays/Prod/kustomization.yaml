@@ -1,5 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 nameSuffix: -prod
 commonAnnotations: 
   app01.kubernetes.prod/managed-by: mfilsti
@@ -9,8 +10,8 @@ resources:
 
 patches:
 - path: deployment-prod.yaml
-- path: service-prod.yaml
+#- path: service-prod.yaml
 
 images:
 - name: filstimatias/gitops-goapp
-  newTag: 7568ca149ab941abdce5f845cfd2dff4715cb1c0
+  newTag: 7c39684f8073b9d8484ac3e323c2f0c7edf9e761
