@@ -18,7 +18,7 @@ spec:
             spec:
               containers:
               - name: http-checker-custom
-                image: filstimatias/gitops-goapp:test
+                image: filstimatias/gitops-goapp:testv1
                 #command: [sh, -c]                
-                args: ["http://my-app04-service-green.staging.svc.cluster.local:8080/hello", "http://my-app04-service-green.staging.svc.cluster.local:8080/headers"]
+                #args: ["http://my-app04-service-green.staging.svc.cluster.local:8080/hello", "http://my-app04-service-green.staging.svc.cluster.local:8080/headers"]
               restartPolicy: Never
