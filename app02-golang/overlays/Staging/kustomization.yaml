@@ -13,4 +13,4 @@ patches:
 
 images:
 - name: filstimatias/gitops-goapp
-  newTag: 751880bd894247a522f224a7ba4228c35eff037e
+  newTag: 341ab719768b266ba770c2f8fff001252305a834
